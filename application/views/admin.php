@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/png" width='16' height='16' href="<?php echo base_url().'./asset/images/logo.png';?>">
   <title>Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -14,11 +15,41 @@
   <link rel="stylesheet" href="<?php echo base_url().'bower_components/Ionicons/css/ionicons.min.css';?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url().'dist/css/AdminLTE.min.css';?>">
+  <link rel="stylesheet" href="<?php echo base_url().'dist/css/AdminLTE.css';?>">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="<?php echo base_url().'dist/css/skins/skin-blue.min.css';?>">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function()
+  {
+      refresh();
+  });
 
+  function refresh()
+  {
+      setTimeout(function()
+      {
+          $('#tableID').load('<?php echo base_url()?>main/load');
+          refresh();
+      }, 1000);
+  }
+  function checkID()
+      {
+
+        var pass1 = document.getElementById('num');
+        var goodColor = "#ffffff";
+        var badColor = "#FF9B37";
+
+        if(num.value.length!=9){//validate for nine numbers
+        num.style.backgroundColor = badColor;
+        }
+        else{
+          num.style.backgroundColor = goodColor;
+        }
+     }
+  </script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -61,9 +92,9 @@
           
 
           <!-- Notifications Menu -->
-          <li class="dropdown notifications-menu">
+          <!--<li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning">10</span>
             </a>
@@ -71,18 +102,18 @@
               <li class="header">You have 10 notifications</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
-                <ul class="menu">
+                <!--<ul class="menu">
                   <li><!-- start notification -->
-                    <a href="#">
+                    <!--<a href="#">
                       <i class="fa fa-users text-aqua"></i> 5 new members request to join+ today
                     </a>
                   </li>
                   <!-- end notification -->
-                </ul>
+                <!--</ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
             </ul>
-          </li>
+          </li>-->
           
                         
             
@@ -93,7 +124,7 @@
               <!-- The user image in the navbar-->
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">Dhananjana</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -112,7 +143,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url()?>main/logout" class="btn btn-default btn-flat">Log out</a>
                 </div>
               </li>
             </ul>
@@ -133,7 +164,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>          
+          <p>Dhananjana Milinda</p>          
         </div>
       </div>
 
@@ -143,24 +174,11 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#user"><i class="fa fa-user"></i> <span>User</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Shedule</span></a></li>
-        <li>
-          <a href="pages/calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li>
+        <li><a href="#user"><i class="fa fa-user"></i> <span>User</span></a></li>
+        <li><a href="#shedule"><i class="fa  fa-list"></i> <span>Shedule</span></a></li>
+        <!--<li><a href="#email"><i class="fa fa-envelope-o"></i><span>Quick Email</span></a></li>-->
+          
+        <li><a href="<?php echo base_url().'customer/home';?>"><i class="fa fa-users"></i><span>Customer</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -190,159 +208,88 @@
         <!-- TABLE: USERS -->
           <div class="box box-info" id="user">
             <div class="box-header with-border">
-              <h3 class="box-title"><i class="fa fa-user"></i> Users</h3>
+              <h3 class="box-title"><i class="fa fa-user"></i> Customer</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
               </div>
             </div>
+            <?=$table?>
             <!-- /.box-header -->
-            <div class="box-body pre-scrollable">
+            <!--<?php echo $this->session->flashdata("error");?>
+            <div class="box-body pre-scrollable" id="tableID">
               <div class="table-responsive">
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>User ID</th>
+                    <th>Customer ID</th>
                     <th>Name</th>
                     <th>Classes</th>
                     <th>Joined Date</th>
                     <th>Exam Date</th>
                     <th>Trial Date</th>
+                    <th>Phone Number</th>
                     <th>Payment Details</th>
-                    <th>Email Address</th>
                     <th>Upadte user</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>Call of Duty IV</td>
-                    <td>A1, A, B1</td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <button type="button" class="btn btn-block btn-primary btn-xs" data-toggle="modal" data-target="#modal-default">Edit</button>
-                      <button type="button" class="btn btn-block btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">Delete</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="label label-warning">Pending</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <button type="button" class="btn btn-block btn-primary btn-xs" data-toggle="modal" data-target="#modal-default">Edit</button>
-                      <button type="button" class="btn btn-block btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">Delete</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>iPhone 6 Plus</td>
-                    <td><span class="label label-danger">Delivered</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <button type="button" class="btn btn-block btn-primary btn-xs" data-toggle="modal" data-target="#modal-default">Edit</button>
-                      <button type="button" class="btn btn-block btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">Delete</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="label label-info">Processing</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <button type="button" class="btn btn-block btn-primary btn-xs" data-toggle="modal" data-target="#modal-default">Edit</button>
-                      <button type="button" class="btn btn-block btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">Delete</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="label label-warning">Pending</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <button type="button" class="btn btn-block btn-primary btn-xs" data-toggle="modal" data-target="#modal-default">Edit</button>
-                      <button type="button" class="btn btn-block btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">Delete</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>iPhone 6 Plus</td>
-                    <td><span class="label label-danger">Delivered</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <button type="button" class="btn btn-block btn-primary btn-xs" data-toggle="modal" data-target="#modal-default">Edit</button>
-                      <button type="button" class="btn btn-block btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">Delete</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>Call of Duty IV</td>
-                    <td><span class="label label-success">Shipped</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <button type="button" class="btn btn-block btn-primary btn-xs" data-toggle="modal" data-target="#modal-default">Edit</button>
-                      <button type="button" class="btn btn-block btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">Delete</button>
-                    </td>
-                  </tr>
+                  <?php 
+                    foreach ($customer_data as $row) {
+                        $id = $row->customerNIC;
+                        $name = $row->name;
+                        $classes = $row->classes;
+                        $jdate = $row->joinedDate;
+                        $edate = $row->examDate;
+                        $tdate = $row->trialDate;
+                        $pnumber = $row->phoneNumber;
+                        $pdetails = $row->paymentDetails;
+                        echo "<tr>";
+                        echo "<td id='id$id'>";
+                        echo $id;
+                        echo "</td>";
+                        echo "<td id='name$id'>";
+                        echo $name; 
+                        echo "</td>";
+                        echo "<td id='classes$id'>";
+                        echo $classes;
+                        echo "</td>";
+                        echo "<td id='jdate$id'>";
+                        echo $jdate;
+                        echo "</td>";
+                        echo "<td id='edate$id'>";
+                        echo $edate;
+                        echo "</td>";
+                        echo "<td id='tdate$id'>";
+                        echo $tdate;
+                        echo "</td>";
+                        echo "<td id='pnumber$id'>";
+                        echo $pnumber;
+                        echo "</td>";
+                        echo "<td id='pdetails$id'>";
+                        echo $pdetails;
+                        echo "</td>";
+                        echo "<td>";
+                        echo "<button class='btn btn-block btn-primary btn-xs' onclick='passData($id)'>Edit</button>";
+                        echo "<button class='btn btn-block btn-danger btn-xs' onclick='deletebtn($id)'>Delete</button>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                ?>
+                     
                   </tbody>
                 </table>
               </div>
               <!-- /.table-responsive -->
-            </div>
+            <!--</div>-->
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
-            </div>
             <!-- /.box-footer -->
           </div>
 
             
           <!-- Shedule -->
-          <div class="box box-primary">
+          <div class="box box-primary" id="shedule">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
 
@@ -362,131 +309,83 @@
             <div class="box-body">
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
               <ul class="todo-list">
-                <li>
-                  <!-- drag handle -->
-                  <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <!-- checkbox -->
-                  <input type="checkbox" value="">
-                  <!-- todo text -->
-                  <span class="text">Design a nice theme</span>
-                  <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
+                
+                  <?php
+                    foreach ($h->result() as $row) {
+  
+                      ?>
+                      <li>
+                      <!-- drag handle -->
                       <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Make the theme responsive</span>
-                  <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Check your messages and notifications</span>
-                  <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                          </span>
+                      <!-- checkbox --> 
+                      <input type="checkbox" value="">
+                      <!-- todo text -->
+                     
+                        <span class="text"> <?php echo $row->eventTitle;?></span>
+                        <span class="text"><?php echo $row->Date; ?> </span>
+                     
+                      
+                      
+                    <?php }
+                    ?>
+                  
+                  
               </ul>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+              <button type="button" class="btn btn-default pull-right" data-toggle="modal"  data-target="#modal-aditem"><i class="fa fa-plus"></i> Add item</button>
             </div>
           </div>
           <!-- /.box -->
-
-          <!-- quick email widget -->
-          <div class="box box-info">
-            <div class="box-header">
-              <i class="fa fa-envelope"></i>
-
-              <h3 class="box-title">Quick Email</h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                  <i class="fa fa-times"></i></button>
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-user"></i> Pass And Fail</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
               </div>
-              <!-- /. tools -->
             </div>
-            <div class="box-body">
-              <form action="#" method="post">
+            <!-- /.box-header -->
+            <!-- form start -->
+            
+              <div class="box-body">
+                <?php echo form_open("trial_controller/insert_data"); ?>
                 <div class="form-group">
-                  <input type="email" class="form-control" name="emailto" placeholder="Email to:">
+                  <label>Date:</label>
+                  <input type="date" class="form-control" id="email" placeholder="Date" name="date">
+                  
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject">
+                  <label>Type:</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="trial" name="checktype">Trial</label>
+                <label class="checkbox-inline"><input type="checkbox" value="exam" name="checktype">Exam</label>
+                  
                 </div>
-                <div>
-                  <textarea class="textarea" placeholder="Message"
-                            style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Participation:</label>
+                  <input type="number" class="form-control" id="email"  placeholder="No of participants" name="participation">
+                 
                 </div>
-              </form>
-            </div>
-            <div class="box-footer clearfix">
-              <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
-                <i class="fa fa-arrow-circle-right"></i></button>
-            </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Fail Number:</label>
+                  <input type="number" class="form-control" id="email" placeholder="No of fails" name="fail_count">
+                  
+                </div>
+                
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+              <?php echo form_close(); ?>
+            
           </div>
+          
 
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -498,23 +397,28 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            
               <div class="box-body">
+                <?php echo form_open("main/registration"); ?>
                 <div class="form-group">
                   <label>Name</label>
-                  <input type="text" class="form-control" placeholder="Enter ...">
+                  <input type="text" class="form-control" placeholder="Enter name" name="name">
+                  <span><?php echo form_error('name'); ?></span>
                 </div>
                 <div class="form-group">
-                  <label>ID</label>
-                  <input type="text" class="form-control" placeholder="Enter ...">
+                  <label>NIC</label>
+                  <input type="number" class="form-control" placeholder="Enter NIC" name="id" id="num" required onkeyup="checkID(); return false;">
+                  <span><?php echo form_error('id'); ?></span>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  <span><?php echo form_error('email'); ?></span>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <span><?php echo form_error('password'); ?></span>
                 </div>
                 
               </div>
@@ -523,67 +427,69 @@
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
-            </form>
+              <?php echo form_close(); ?>
+            
           </div>
 
           <!--modal for user table-->
-          <div class="modal fade" id="modal-default">
+          <div class="modal modal-default fade" id="Editmodal">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Default Modal</h4>
+                <h4 class="modal-title">Edit Customer</h4>
               </div>
               <div class="modal-body">
                <!-- general form elements -->
-          <div class="box box-primary">
+          
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              <h3 class="box-title">Customer</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <?php echo form_open("main/updateCustomer"); ?>
               <div class="box-body">
                 <div class="form-group">
+                  <label>NIC number</label>
+                  <input type="number" name="customernic" readonly id="customernic" class="form-control">
+                </div>
+                <div class="form-group">
                   <label>Name</label>
-                  <input type="text" class="form-control" placeholder="Enter ...">
+                  <input type="text" name="customername" readonly id="customername" class="form-control" >
                 </div>
                 <div class="form-group">
-                  <label>classes</label>
-                  <input type="text" class="form-control" placeholder="Enter ...">
+                  <label>Classes</label>
+                  <input type="text" name="customerclasses" id="customerclasses" class="form-control" >
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  <label>Joined Date</label>
+                  <input type="date" name="customerjdate" id="customerjdate" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <label>Exam Date</label>
+                  <input type="date" name="customeredate" id="customeredate" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
-
-                  <p class="help-block">Example block-level help text here.</p>
+                  <label>Trial Date</label>
+                  <input type="date" name="customertdate" id="customertdate" class="form-control">
                 </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input type="number" name="customerpnumber" id="customerpnumber" class="form-control">
                 </div>
+                <div class="form-group">
+                  <label>Payment Details</label>
+                  <input type="text" name="customerpayment" id="customerpayment" class="form-control">
+                </div>
+                
               </div>
               <!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                <?php echo form_close(); ?>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -591,7 +497,7 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-
+          
         <div class="modal modal-danger fade" id="modal-danger">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -601,12 +507,18 @@
                 <h4 class="modal-title">Danger Modal</h4>
               </div>
               <div class="modal-body">
-                <p>Do you want to delete the user?</p>
+                <p>Do you want to delete the customer ID?</p>
+                <?php echo form_open("Main/deleteCust"); ?>
+              </div>
+              <div class="form-group">
+                    <label>ID</label>
+                    <input name='idnumber' class="form-control" type="text"  id="del_id" readonly>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline">Yes</button>
-                <button type="button" class="btn btn-outline">No</button>
+                <button type="submit" class="btn btn-outline">Yes</button>
+                <?php echo form_close(); ?>
+                
               </div>
             </div>
             <!-- /.modal-content -->
@@ -632,7 +544,36 @@
     <strong>Copyright &copy; 2017 <a href="#">Kumarasiri Driving Training School</a>.</strong> All rights reserved.
   </footer>
 
-  
+<script type="text/javascript">
+function passData(id){
+        var id = document.getElementById('id'+id).innerText;
+        var name = document.getElementById('name'+id).innerText;
+        var classes = document.getElementById('classes'+id).innerText;
+        var jdate = document.getElementById('jdate'+id).innerText;
+        var edate = document.getElementById('edate'+id).innerText;
+        var tdate = document.getElementById('tdate'+id).innerText;
+        var pnumber = document.getElementById('pnumber'+id).innerText;
+        var pdetails = document.getElementById('pdetails'+id).innerText;
+        $("#Editmodal").modal("show");
+
+        document.getElementById('customernic').value = id;
+        document.getElementById('customername').value = name;
+        document.getElementById('customerclasses').value = classes;
+        document.getElementById('customerjdate').value = jdate;
+        document.getElementById('customeredate').value = edate;
+        document.getElementById('customertdate').value = tdate;
+        document.getElementById('customerpnumber').value = pnumber;
+        document.getElementById('customerpayment').value = pdetails;
+    
+    }
+function deletebtn(id){
+        //console.log(id);
+        var id = document.getElementById('id'+id).innerText;
+        //console.log(id);
+        $("#modal-danger").modal("show");
+        document.getElementById('del_id').value = id;           
+    }
+</script>  
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
